@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Chuva de Unidades | Medidas em Ação</title>
+  <meta name="theme-color" content="#050a14">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/game1.css">
+</head>
+<body>
+
+<div id="game1-wrapper">
+
+  
+  <canvas id="game1-canvas"></canvas>
+
+  
+  <div id="flash-overlay"></div>
+
+  
+  <div id="combo-display"></div>
+
+  
+  <div id="hud">
+    <a id="back-btn" href="index.html">← Menu</a>
+
+    <div class="hud-block">
+      <span class="hud-label">Pontos</span>
+      <span class="hud-value cyan" id="score-val">0</span>
+    </div>
+
+    <div class="lives-display" id="lives-display">
+      <span class="life-icon">❤️</span>
+      <span class="life-icon">❤️</span>
+      <span class="life-icon">❤️</span>
+    </div>
+
+    <div class="hud-block">
+      <span class="hud-label">Recorde</span>
+      <span class="hud-value gold" id="record-val">0</span>
+    </div>
+  </div>
+
+  
+  <div id="mission-banner">
+    <div id="mission-text">Prepare-se!</div>
+  </div>
+
+  <div id="mission-goal" class="mission-goal" aria-live="polite">
+    <span id="mission-goal-label">OBJETIVO</span>
+    <div id="mission-goal-text">Corte apenas as unidades da categoria indicada.</div>
+  </div>
+
+  
+  <div id="hud-bottom">
+    <span style="font-size:0.75rem; color:var(--text-dim); font-weight:700;">MISSÃO</span>
+    <div id="mission-timer-bar">
+      <div id="mission-timer-fill" style="width:100%"></div>
+    </div>
+    <button class="hud-bottom-btn" id="pause-btn">
+      <span id="pause-btn-label">⏸ PAUSAR</span>
+    </button>
+  </div>
+
+  
+  <div class="game-overlay active" id="overlay-start">
+    <div class="overlay-card">
+      <div class="overlay-icon">🌧️</div>
+      <div class="overlay-title">Chuva de Unidades</div>
+      <p class="overlay-sub">
+        Corte apenas as unidades da categoria indicada.<br>
+        Você tem <strong>3 vidas</strong> — não corte as erradas!
+      </p>
+      <div style="background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.2); border-radius:12px; padding:16px 20px; text-align:left; width:100%; font-size:0.85rem; color:var(--text-dim);">
+        <strong style="color:var(--cyan); display:block; margin-bottom:8px;">Como cortar:</strong>
+        🖱️ Arrastar o mouse rapidamente<br>
+        👆 Deslizar o dedo na tela
+      </div>
+      <div class="overlay-buttons">
+        <button class="o-btn o-btn-primary" id="btn-start">▶ COMEÇAR</button>
+        <a class="o-btn o-btn-secondary" href="index.html">Menu</a>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="game-overlay" id="overlay-pause">
+    <div class="overlay-card">
+      <div class="overlay-icon">⏸</div>
+      <div class="overlay-title">Pausado</div>
+      <div class="overlay-buttons">
+        <button class="o-btn o-btn-primary" id="btn-resume">▶ Continuar</button>
+        <button class="o-btn o-btn-secondary" id="btn-restart-pause">↺ Reiniciar</button>
+        <button class="o-btn o-btn-secondary" id="btn-home-pause">⌂ Menu</button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="game-overlay" id="overlay-result">
+    <div class="overlay-card">
+      <div class="overlay-icon">🎯</div>
+      <div class="overlay-title">Fim de Jogo!</div>
+
+      <div class="score-display">
+        <div class="score-big" id="result-score">0</div>
+        <div class="score-label">Pontuação Final</div>
+      </div>
+
+      <div style="font-size:0.85rem; color:var(--text-dim);">
+        Maior combo: <strong id="result-combo" style="color:var(--gold)">0</strong>×
+      </div>
+
+      <div class="record-badge" id="result-record-badge" style="display:none">
+        🏆 Novo Recorde!
+      </div>
+
+      <div class="overlay-buttons">
+        <button class="o-btn o-btn-primary" id="btn-restart">↺ Jogar Novamente</button>
+        <button class="o-btn o-btn-secondary" id="btn-home">⌂ Menu</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="equipe.js"></script>
+<script src="data/units.js"></script>
+<script src="data/questions.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/game1.js"></script>
+</body>
+</html>

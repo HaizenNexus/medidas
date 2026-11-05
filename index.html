@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Medidas em Ação</title>
+  <meta name="description" content="Jogo educativo com desafios de grandezas e medidas para aprender de forma divertida.">
+  <meta name="theme-color" content="#071c24">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+<div id="math-particles" class="math-particles"></div>
+
+<nav class="nav">
+  <div class="nav-logo">Medidas</div>
+  <div class="nav-links">
+    <button class="nav-btn" id="btn-howto">Como Jogar</button>
+    <button class="nav-btn" id="btn-records">🏆 Recordes</button>
+    <button class="nav-btn" id="btn-sound" title="Ativar/desativar som">🔊</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Jogo Educativo · Medidas e grandezas</div>
+
+  <div class="hero-logo">
+    <div class="hero-logo-text">Medidas</div>
+    <div class="hero-logo-sub">Em ação</div>
+  </div>
+
+  <p class="hero-slogan">
+    <em>Aprender medindo, praticando e brincando.</em>
+  </p>
+
+  <div class="hero-cta">
+    <button class="btn-play" id="btn-play">▶&nbsp; JOGAR AGORA</button>
+    <button class="btn btn-secondary" id="btn-records-hero" onclick="document.getElementById('btn-records').click()">
+      🏆 Recordes
+    </button>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-value" id="stat-rec1">—</div>
+      <div class="stat-label">Recorde Chuva</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="stat-rec2">—</div>
+      <div class="stat-label">Recorde Associação</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="stat-partidas">0</div>
+      <div class="stat-label">Partidas jogadas</div>
+    </div>
+  </div>
+</div>
+
+<section class="section" id="game-selection">
+  <h2 class="section-title">Escolha seu Desafio</h2>
+  <p class="section-subtitle">Dois minigames arcade para aprender grandezas e medidas de verdade.</p>
+
+  <div class="games-grid">
+
+    
+    <div class="game-card" id="card-game1">
+      <div class="game-card-icon blue">🌧️</div>
+      <div>
+        <div class="game-card-num">Minigame 01</div>
+        <div class="game-card-title">Chuva de Unidades</div>
+      </div>
+      <p class="game-card-desc">
+        Unidades de medida caem pela tela. Corte as corretas com o mouse ou o dedo
+        antes que escapem! Massa, comprimento, tempo, capacidade e mais.
+      </p>
+
+      
+      <div class="game-card-preview">
+        <canvas id="preview1"></canvas>
+      </div>
+
+      <div class="game-card-tags">
+        <span class="game-card-tag">🖱️ Mouse</span>
+        <span class="game-card-tag">👆 Touch</span>
+        <span class="game-card-tag">⚡ Reflexo</span>
+      </div>
+      <div class="game-card-arrow">→</div>
+    </div>
+
+    
+    <div class="game-card" id="card-game2">
+      <div class="game-card-icon cyan">�</div>
+      <div>
+        <div class="game-card-num">Minigame 02</div>
+        <div class="game-card-title">Associação das Medidas</div>
+      </div>
+      <p class="game-card-desc">
+        Escolha a categoria e resolva as questões de associação com calma.
+        Leia a pergunta, pense no valor correto e marque a resposta certa.
+      </p>
+
+      
+      <div class="game-card-preview">
+        <canvas id="preview2"></canvas>
+      </div>
+
+      <div class="game-card-tags">
+        <span class="game-card-tag">🧠 Atenção</span>
+        <span class="game-card-tag">✅ Resposta</span>
+        <span class="game-card-tag">📚 Categoria</span>
+      </div>
+      <div class="game-card-arrow">→</div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="credits">
+  <div class="credits-title">Desenvolvido por</div>
+  <div class="credits-team" id="credits-team"></div>
+  <div class="credits-extra" id="credits-extra"></div>
+</footer>
+
+<div class="modal-overlay" id="modal-records">
+  <div class="modal">
+    <button class="modal-close" data-modal-close="modal-records">✕</button>
+    <h2 class="modal-title">🏆 Recordes</h2>
+    <div class="records-grid">
+
+      <div class="record-card">
+        <div class="record-info">
+          <span class="record-icon">🌧️</span>
+          <div>
+            <div class="record-game">Chuva de Unidades</div>
+            <div class="record-sub">Melhor pontuação</div>
+          </div>
+        </div>
+        <div class="record-score" id="rec-score1">0</div>
+      </div>
+
+      <div class="record-card">
+        <div class="record-info">
+          <span class="record-icon">�</span>
+          <div>
+            <div class="record-game">Associação das Medidas</div>
+            <div class="record-sub">Melhor pontuação</div>
+          </div>
+        </div>
+        <div class="record-score" id="rec-score2">0</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-howto">
+  <div class="modal">
+    <button class="modal-close" data-modal-close="modal-howto">✕</button>
+    <h2 class="modal-title">📖 Como Jogar</h2>
+
+    <div class="howto-grid">
+      <div style="margin-bottom:12px; font-weight:700; color:#00d4ff; font-size:0.9rem; letter-spacing:1px;">
+        🌧️ CHUVA DE UNIDADES
+      </div>
+
+      <div class="howto-item">
+        <div class="howto-num">1</div>
+        <div class="howto-text">
+          <strong>Leia a missão</strong>
+          <p>Uma categoria aparece no topo: comprimento, massa, capacidade ou tempo.</p>
+        </div>
+      </div>
+      <div class="howto-item">
+        <div class="howto-num">2</div>
+        <div class="howto-text">
+          <strong>Corte com o mouse ou o dedo</strong>
+          <p>Arraste rápido sobre as unidades corretas para cortá-las e ganhar pontos.</p>
+        </div>
+      </div>
+      <div class="howto-item">
+        <div class="howto-num">3</div>
+        <div class="howto-text">
+          <strong>Evite as erradas</strong>
+          <p>Cortar uma unidade da categoria errada remove uma vida. Você tem 3 vidas.</p>
+        </div>
+      </div>
+
+      <div style="margin:16px 0 12px; font-weight:700; color:#00d4ff; font-size:0.9rem; letter-spacing:1px;">
+        � ASSOCIAÇÃO DAS MEDIDAS
+      </div>
+
+      <div class="howto-item">
+        <div class="howto-num">1</div>
+        <div class="howto-text">
+          <strong>Escolha a categoria</strong>
+          <p>Depois de abrir o jogo, selecione a área que você quer treinar.</p>
+        </div>
+      </div>
+      <div class="howto-item">
+        <div class="howto-num">2</div>
+        <div class="howto-text">
+          <strong>Leia a questão</strong>
+          <p>Observe a pergunta do topo e pense qual resposta está correta.</p>
+        </div>
+      </div>
+      <div class="howto-item">
+        <div class="howto-num">3</div>
+        <div class="howto-text">
+          <strong>Marque a resposta certa</strong>
+          <p>Acertar vale pontos. Errar custa uma vida, então escolha com atenção.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="equipe.js"></script>
+<script src="data/units.js"></script>
+<script src="data/questions.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

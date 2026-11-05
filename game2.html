@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Associação das Medidas | Medidas em Ação</title>
+  <meta name="theme-color" content="#050a14">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/game2.css">
+</head>
+<body>
+
+<div id="game2-wrapper">
+
+  
+  <canvas id="game2-canvas"></canvas>
+
+  
+  <div id="hud2">
+    <a id="back-btn2" href="index.html">← Menu</a>
+
+    <div class="hud-block">
+      <span class="hud-label">Pontos</span>
+      <span class="hud-value cyan" id="score2-val">0</span>
+    </div>
+
+    <div class="lives-display" id="lives2-display">
+      <span class="life-icon">❤️</span>
+      <span class="life-icon">❤️</span>
+      <span class="life-icon">❤️</span>
+    </div>
+
+    <div class="hud-block">
+      <span class="hud-label">Categoria</span>
+      <span class="hud-value cyan" id="level2-val">Comprimento</span>
+    </div>
+
+    <div class="hud-block">
+      <span class="hud-label">Recorde</span>
+      <span class="hud-value gold" id="record2-val">0</span>
+    </div>
+
+    <button id="pause-btn2">
+      <span id="pause2-btn-label">⏸ PAUSAR</span>
+    </button>
+  </div>
+
+  
+  <div id="question-panel">
+    <div id="question-category"></div>
+    <div id="question-text">Escolha a categoria e comece!</div>
+    <div id="question-tip">Clique na resposta correta.</div>
+  </div>
+
+  <div id="answer-grid" class="answer-grid"></div>
+
+  
+  <div id="distance-bar">
+    <div id="distance-fill" style="height:0%"></div>
+  </div>
+
+  
+  <div id="touch-controls">
+    <button class="touch-btn" id="touch-left">◀</button>
+    <button class="touch-btn" id="touch-right">▶</button>
+  </div>
+
+  
+  <div class="game-overlay active" id="overlay-start">
+    <div class="overlay-card">
+      <div class="overlay-icon">🎯</div>
+      <div class="overlay-title">Associação das Medidas</div>
+      <p class="overlay-sub">
+        Escolha a categoria que você quer treinar e depois responda as perguntas clicando na opção correta.<br>
+        Leia a questão do topo e escolha a resposta certa com calma.
+      </p>
+
+      <div style="display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:10px; width:100%;">
+        <button class="category-btn active" data-category="comprimento">📏 Comprimento</button>
+        <button class="category-btn" data-category="massa">⚖️ Massa</button>
+        <button class="category-btn" data-category="capacidade">🥛 Capacidade</button>
+        <button class="category-btn" data-category="tempo">⏱️ Tempo</button>
+        <button class="category-btn" data-category="temperatura">🌡️ Temperatura</button>
+        <button class="category-btn" data-category="area">📐 Área</button>
+      </div>
+
+      <div style="background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.2); border-radius:12px; padding:16px 20px; text-align:left; width:100%; font-size:0.85rem; color:var(--text-dim);">
+        <strong style="color:var(--cyan); display:block; margin-bottom:8px;">Como jogar:</strong>
+        1. Escolha a categoria.<br>
+        2. Leia a pergunta do topo.<br>
+        3. Clique na resposta correta.
+      </div>
+      <div class="overlay-buttons">
+        <button class="o-btn o-btn-primary" id="btn-start2">▶ INICIAR</button>
+        <a class="o-btn o-btn-secondary" href="index.html">Menu</a>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="game-overlay" id="overlay-pause">
+    <div class="overlay-card">
+      <div class="overlay-icon">⏸</div>
+      <div class="overlay-title">Pausado</div>
+      <div class="overlay-buttons">
+        <button class="o-btn o-btn-primary" id="btn-resume2">▶ Continuar</button>
+        <button class="o-btn o-btn-secondary" id="btn-restart2-pause">↺ Reiniciar</button>
+        <button class="o-btn o-btn-secondary" id="btn-home2-pause">⌂ Menu</button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="game-overlay" id="overlay-result">
+    <div class="overlay-card">
+      <div class="overlay-icon">🏁</div>
+      <div class="overlay-title">Fim de Jogo!</div>
+
+      <div class="score-display">
+        <div class="score-big" id="result2-score">0</div>
+        <div class="score-label">Pontuação Final</div>
+      </div>
+
+      <div style="display:flex; gap:24px; justify-content:center; font-size:0.85rem; color:var(--text-dim);">
+        <span>Nível: <strong id="result2-level" style="color:var(--cyan)">1</strong></span>
+        <span>Acertos: <strong id="result2-correct" style="color:var(--green)">0</strong></span>
+      </div>
+
+      <div class="record-badge" id="result2-record-badge" style="display:none">
+        🏆 Novo Recorde!
+      </div>
+
+      <div class="overlay-buttons">
+        <button class="o-btn o-btn-primary" id="btn-restart2">↺ Jogar Novamente</button>
+        <button class="o-btn o-btn-secondary" id="btn-home2">⌂ Menu</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="equipe.js"></script>
+<script src="data/units.js"></script>
+<script src="data/questions.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/game2.js"></script>
+</body>
+</html>
